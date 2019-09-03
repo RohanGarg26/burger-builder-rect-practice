@@ -8,7 +8,7 @@ const layout = (props) => (
     <div>
       toolbar,sidebar,backdrop
     </div>
-    <main className={classes.Content}> {/* {classes.Content} not working !! */}
+    <main className={classes.Content}>
       {props.children}
     </main>
   </Auxiliary>
