@@ -24,14 +24,13 @@ class BurgerBuilder extends Component {
 
   addIngridientHandler = (type) => {
     const oldCount = this.state.ingridients[type];
-    // console.log(this.state.ingridients[type]);
     const updateIngridients = {
-      ...this.state.Ingridients
+      ...this.state.ingridients
     }
     const updatedCounted = oldCount + 1;
     updateIngridients[type] = updatedCounted
     const priceAddition = INGRIDIENT_PRICES[type]
-    const oldPrice= this.state.totalPrice
+    const oldPrice = this.state.totalPrice
     const newPrice = oldPrice + priceAddition
     this.setState({
       totalPrice: newPrice,
@@ -40,15 +39,40 @@ class BurgerBuilder extends Component {
   }
 
   removeIngridientHandler = (type) => {
-
+    const oldCount = this.state.ingridients[type];
+    const updateIngridients = {
+      ...this.state.ingridients
+    }
+    if (oldCount <= 0) {
+      return;
+    }
+    const updatedCounted = oldCount - 1;
+    updateIngridients[type] = updatedCounted
+    const priceReduction = INGRIDIENT_PRICES[type]
+    const oldPrice = this.state.totalPrice
+    const newPrice = oldPrice - priceReduction
+    this.setState({
+      totalPrice: newPrice,
+      ingridients: updateIngridients
+    })
   }
 
   render() {
+    const disabledInfo = {
+      ...this.state.ingridients
+    }
+    // eslint-disable-next-line
+    for (let key in disabledInfo) {
+      disabledInfo[key] = disabledInfo[key] <= 0
+    }
     return (
       <Auxiliary>
         <Burger ingridients={this.state.ingridients} />
-        <BuildControls 
-          ingridientAdded={this.addIngridientHandler}/>
+        <BuildControls
+          ingridientAdded={this.addIngridientHandler}
+          ingridientRemoved={this.removeIngridientHandler}
+          disabled={disabledInfo}
+          price={this.state.totalPrice} />
       </Auxiliary>
     )
   }
