@@ -107,10 +107,11 @@ class ContactData extends Component {
     const order = {
       ingridients: this.props.ings,
       price: this.props.price, //not good for production
-      orderData: formData
+      orderData: formData,
+      userId: this.props.userId
     }
 
-    this.props.onOrderBurger(order)
+    this.props.onOrderBurger(order, this.props.token)
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
@@ -172,13 +173,15 @@ const mapStateToProps = state => {
   return {
     ings: state.burgerBuilder.ingridients,
     price: state.burgerBuilder.totalPrice,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token,
+    userId: state.auth.userId
   }
 }
 
 const mapDispatchToProps = dispatch => { 
   return{
-    onOrderBurger : (orderData) => dispatch(actions.purchaseBurger(orderData))
+    onOrderBurger : (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
   }
 }
 
