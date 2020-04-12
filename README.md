@@ -1,6 +1,6 @@
 ## Burger Builder
 
-#####Desktop View
+##### Desktop View
 ![Screenshot (24)](https://user-images.githubusercontent.com/49039193/79064781-7582d280-7cc9-11ea-8ffd-6e45d522bc5d.png)
 
 [View Project Live](https://burger-builder-a9048.web.app/)
